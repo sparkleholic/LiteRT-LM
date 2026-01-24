@@ -178,6 +178,16 @@ build:macos --features=archive_param_file
 build:macos --linkopt=-Wl,-undefined,dynamic_lookup
 build:macos --host_linkopt=-Wl,-undefined,dynamic_lookup
 
+# Set Xcode toolchain environment variables
+build:macos --action_env=DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+build:macos --repo_env=DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+
+# Use cc toolchains from apple_support for Apple builds
+build:macos --config=apple-toolchain
+build:apple-toolchain --apple_crosstool_top=@local_config_apple_cc//:toolchain
+build:apple-toolchain --crosstool_top=@local_config_apple_cc//:toolchain
+build:apple-toolchain --host_crosstool_top=@local_config_apple_cc//:toolchain
+
 # Settings for MacOS on ARM CPUs.
 build:macos_arm64 --cpu=darwin_arm64
 build:macos_arm64 --macos_minimum_os=11.0
