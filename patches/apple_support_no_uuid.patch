@@ -1,0 +1,10 @@
+--- a/crosstool/osx_cc_configure.bzl
++++ b/crosstool/osx_cc_configure.bzl
+@@ -103,7 +103,6 @@
+         "-arch",
+         "x86_64",
+         "-Wl,-no_adhoc_codesign",
+-        "-Wl,-no_uuid",
+         "-O3",
+         "-o",
+         out_name,

@@ -44,6 +44,16 @@ http_archive(
 
 load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
 
+# Apple Support - MUST be declared BEFORE rules_rust_dependencies() to override rules_rust's old version
+# This fixes the LC_UUID missing error on macOS by patching out -Wl,-no_uuid flag
+http_archive(
+    name = "build_bazel_apple_support",
+    patch_args = ["-p1"],
+    patches = ["//patches:apple_support_no_uuid.patch"],
+    sha256 = "b53f6491e742549f13866628ddffcc75d1f3b2d6987dc4f14a16b242113c890b",
+    url = "https://github.com/bazelbuild/apple_support/releases/download/1.17.1/apple_support.1.17.1.tar.gz",
+)
+
 rules_rust_dependencies()
 
 rust_register_toolchains(
